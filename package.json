@@ -14,5 +14,15 @@
     "test": "open ./SpecRunner.html"
   },
   "author": "Hack Reactor <curriculum.team@hackreactor.com>",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isenese/hrr38-chatterbox-client.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/isenese/hrr38-chatterbox-client/issues"
+  },
+  "homepage": "https://github.com/isenese/hrr38-chatterbox-client#readme"
 }
