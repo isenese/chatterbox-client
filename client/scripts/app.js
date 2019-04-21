@@ -15,28 +15,18 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
+    setInterval(App.fetch, 3000);
+
   },
 
   fetch: function(callback = ()=>{}) {
-    var rooms = [];
+
     Parse.readAll((data) => {
-      // examine the response from the server request:
-      // console.log(data.results, 'this is coming from App.js');
-      data.results.filter(message => message.text && message.username && message.roomname)
-        .forEach(message => {
-          MessagesView.renderMessage(message);
-        //console.log(message, "What is this");
-        });
+      if (!data.results || !data.results.length) { return; }
 
-      data.results.filter(message => message.roomname)
+      Rooms.update(data.results, RoomsView.render);
+      Messages.update(data.results, MessagesView.render);
 
-        .forEach(room => {
-          if (!rooms.includes(room.roomname)) {
-            rooms.push(room.roomname);
-          }
-          RoomsView.renderRoom(rooms);
-        });
-      console.log(rooms);
       callback();
     });
   },
@@ -51,3 +41,22 @@ var App = {
     FormView.setStatus(false);
   }
 };
+
+//var rooms = [];
+// examine the response from the server request:
+// console.log(data.results, 'this is coming from App.js');
+// data.results.filter(message => message.text && message.username && message.roomname)
+//   .forEach(message => {
+//     MessagesView.renderMessage(message);
+//   //console.log(message, "What is this");
+//   });
+
+// data.results.filter(message => message.roomname)
+
+//   .forEach(room => {
+//     if (!rooms.includes(room.roomname)) {
+//       rooms.push(room.roomname);
+//     }
+//     RoomsView.renderRoom(rooms);
+//   });
+// console.log(rooms);
